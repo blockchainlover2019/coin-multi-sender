@@ -1,0 +1,23 @@
+{
+  "name": "aptos-coin-multi-sender",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "compile": "aptos move compile",
+    "pubmod": "aptos move publish",
+    "test": "aptos move test",
+    "start": "npx ts-node scripts/init-app.ts",
+    "faucet": "aptos account fund-with-faucet  --amount 1000000000 --account 0xe1dd5e689014a64b3aab077ef3248620493cf0caa4d39cda3581f8fe5ea018b7"
+  },
+  "dependencies": {
+    "aptos": "^1.7.1",
+    "assert": "^2.0.0",
+    "read-yaml-file": "^2.1.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.5"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.0"
+  }
+}
