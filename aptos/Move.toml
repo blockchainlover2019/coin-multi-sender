@@ -1,0 +1,12 @@
+[package]
+name = 'aptos-coin-sender'
+version = '1.0.0'
+
+[dependencies.AptosFramework]
+git = 'https://github.com/aptos-labs/aptos-core.git'
+rev = 'main'
+subdir = 'aptos-move/framework/aptos-framework'
+
+[addresses]
+AptosFramework = "0x1"
+MultiSender = "137fda371ad99f2d07bb1bd3dc3ff5bfbd8d0a0026de6ad171fbfdc419814c5e"
