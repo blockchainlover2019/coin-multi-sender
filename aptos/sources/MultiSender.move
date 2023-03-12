@@ -1,13 +1,17 @@
 module MultiSender::MultiSender {
   
+  use std::signer;
+  use std::error;
+
+  use aptos_framework::account;
   use aptos_framework::coin;
-  use aptos_framework::aptos_coin;
+  use aptos_framework::aptos_coin::AptosCoin;
 
   const INFO_SEED: vector<u8> = b"INFO_SEED";
-  const DEFAULT_APT_FEE = 100_000; /// 0.001 APT
+  const DEFAULT_APT_FEE: u64 = 100000; /// 0.001 APT
   
   // these are error codes
-  const EINVALID_ADMIN = 1;
+  const EINVALID_ADMIN: u64 = 1;
 
   struct GlobalInfo has key {
       admin_addr: address,
@@ -46,8 +50,8 @@ module MultiSender::MultiSender {
     let info_addr = account::create_resource_address(&@MultiSender, INFO_SEED);
     let global_info = borrow_global_mut<GlobalInfo>(info_addr);
     assert!(sender_addr == global_info.admin_addr, error::invalid_argument(EINVALID_ADMIN));
-
-    let fee_coin = coin::extract<AptosCoin>(&mut global_info.fees, coin::value(global_info.fees));
+    let fee_amount = coin::value(&global_info.fees);
+    let fee_coin = coin::extract<AptosCoin>(&mut global_info.fees, fee_amount);
     coin::deposit<AptosCoin>(sender_addr, fee_coin);
   }
   

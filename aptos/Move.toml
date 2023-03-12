@@ -4,9 +4,9 @@ version = '1.0.0'
 
 [dependencies.AptosFramework]
 git = 'https://github.com/aptos-labs/aptos-core.git'
-rev = 'main'
+rev = 'mainnet'
 subdir = 'aptos-move/framework/aptos-framework'
 
 [addresses]
 AptosFramework = "0x1"
-MultiSender = "137fda371ad99f2d07bb1bd3dc3ff5bfbd8d0a0026de6ad171fbfdc419814c5e"
+MultiSender = "0xe1dd5e689014a64b3aab077ef3248620493cf0caa4d39cda3581f8fe5ea018b7"
