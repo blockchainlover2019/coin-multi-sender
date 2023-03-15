@@ -9,4 +9,4 @@ subdir = 'aptos-move/framework/aptos-framework'
 
 [addresses]
 AptosFramework = "0x1"
-MultiSender = "6aef3cab5c08c301199eabce3c22155069e4a090a359cfbe4be122b371843bbd"
+MultiSender = "d587c717ca5d0678eeae16ea2b51ff141f3185bd1b932d30041e9319fea798a3"

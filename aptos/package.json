@@ -8,7 +8,7 @@
     "pubmod": "aptos move publish",
     "test": "aptos move test",
     "start": "npx ts-node scripts/init-app.ts",
-    "faucet": "aptos account fund-with-faucet  --amount 1000000000 --account 6aef3cab5c08c301199eabce3c22155069e4a090a359cfbe4be122b371843bbd"
+    "faucet": "aptos account fund-with-faucet  --amount 1000000000 --account d587c717ca5d0678eeae16ea2b51ff141f3185bd1b932d30041e9319fea798a3"
   },
   "dependencies": {
     "aptos": "^1.7.1",

@@ -1,5 +1,6 @@
 module MultiSender::MultiSender {
   
+  use std::vector;
   use std::signer;
   use std::error;
   use aptos_framework::coin;
@@ -17,6 +18,7 @@ module MultiSender::MultiSender {
   //
   
   const EINVALID_ADMIN: u64 = 1;
+  const EINVALID_ARGUMENTS: u64 = 1;
 
   //
   // Data Type
@@ -78,16 +80,31 @@ module MultiSender::MultiSender {
   }
 
   // no limit
-  public entry fun transfer_coin<CoinType>(sender: &signer, to: address, amount: u64) acquires GlobalInfo {
+  public entry fun transfer_coin<CoinType>(
+    sender: &signer, 
+    recipients: vector<address>,
+    amounts: vector<u64>
+  ) acquires GlobalInfo {
 
     let global_info = borrow_global_mut<GlobalInfo>(@MultiSender);
     
+    let recipients_len = vector::length(&recipients);
     // cut fee here
-    let fee_apt = coin::withdraw<AptosCoin>(sender, global_info.transfer_fee);
+    let fee_apt = coin::withdraw<AptosCoin>(sender, global_info.transfer_fee * recipients_len);
     coin::merge<AptosCoin>(&mut global_info.fees, fee_apt);
 
-    // transfer
-    coin::transfer<CoinType>(sender, to, amount)
+    assert!(
+        recipients_len == vector::length(&amounts),
+        EINVALID_ARGUMENTS,
+    );
+
+    let i = 0;
+    while (i < recipients_len) {
+        let to = *vector::borrow(&recipients, i);
+        let amount = *vector::borrow(&amounts, i);
+        coin::transfer<CoinType>(sender, to, amount);
+        i = i + 1;
+    };
   }
   
 }
